@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZIRACHI ACADEMIA</title>
+<style>
+  p{text-align:left;color: aqua;border: 0cqmax;}
+  body { font-family: Arial; margin: 0; background: #eef2ff; background-image: url('school.jpg'); background-size: cover; background-attachment: fixed; }
+  header { background: blue; color: white; padding: 15px; }
+  .wrap { padding: 15px; max-width: 1100px; margin: auto; background: white; }
+  button { padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
+  .blue { background: blue; color: white; width: 100%; margin-top: 10px; }
+  .green { background: green; color: white; width: 100%; margin-top: 10px; }
+  input, select { padding: 10px; border: 1px solid #ccc; border-radius: 8px; width: 100%; box-sizing: border-box; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: navy; color: white; padding: 10px; text-align: left; position: sticky; top: 0; }
+  td { padding: 8px; border-bottom: 1px solid #eee; }
+  .card { border: 1px solid #ddd; border-radius: 12px; padding: 15px; margin-bottom: 15px; }
+  .report { border: 2px dashed blue; border-radius: 12px; padding: 15px; margin-bottom: 15px; background: #f8f8f8; }
+  .tabs button { background: #eee; margin-right: 5px; }
+  .tabs button.active { background: navy; color: white; }
+  iframe { width: 100%; height: 250px; border: 2px solid navy; border-radius: 10px; }
+  .frames-box { display: flex; gap: 10px; }
+  .menu-box { width: 25%; background: navy; color: white; padding: 15px; border-radius: 10px; }
+  .menu-box a { color: yellow; display: block; margin: 10px 0; font-weight: bold; }
+  .main-box { width: 75%; }
+</style>
+</head>
+<body>
+<background:"zirachi.webp">
+<header>
+  <h1><img src="ZIRACA - Copy.png" height="50" width="50" shape="circular">ZIRACHI ACADEMIA</h1>
+  <p>Fast • Offline • Online</p>
+  <button style="background:green;color:white" onclick="publish()">PUBLISH - WhatsApp</button>
+</header>
+<h2>Web-Based School Management System -NYUMA PAUL</h2>
+<P>Make your Academic Work Simple | Time Saving</P>
+<div class="wrap">
+
+  <!-- FRAMES + IFRAME IN ONE -->
+  <div class="card">
+    
+    <div class="frames-box">
+      <div class="menu-box">
+        <h3>MENU</h3>
+        <a href="ZIRACHIACA_fix.html" target="mainFrame">Home</a>
+        <a href="#marks" target="mainFrame">Marks</a>
+        <a href="#report" target="mainFrame">Report Cards</a>
+        <a href="ZIRACHIACA.html" target="mainFrame">Fees</a>
+        <p>Menu stays. Main changes.</p>
+      </div>
+      <div class="main-box">
+        <iframe name="mainFrame" src="https://Wikipedia.com" title="Main Frame"></iframe>
+      </div>
+    </div>
+    <br>
+    <h3>School Website Preview (iframe)</h3>
+    <iframe id="myFrame" src="https://Wikipedia.com"></iframe>
+    <br><br>
+    <b>Change iframe link:</b>
+    <input id="iframeLink" value="https://Wikipedia.com">
+    <button class="blue" onclick="changeIframe()">Load New Link</button>
+  </div>
+
+  <div class="card">
+    <b>YOUR SCHOOL NAME:</b>
+    <input id="schoolName" placeholder="e.g. St. Marys Primary School" oninput="changeName()">
+    <br><br><b>MOTTO:</b><input id="mottoInput" placeholder="e.g. Excellence For All">
+    <br><br><b>LOGO:</b><input type="file">
+  </div>
+
+  <div class="tabs">
+    <button onclick="showPage('dash', this)">Dashboard</button>
+    <button onclick="showPage('marks', this)" class="active">Marks + Fees + Attendance</button>
+    <button onclick="showPage('report', this)">Report Cards</button>
+    <button onclick="showPage('more', this)">Fees - Behaviour - Medical</button>
+    <button onclick="showPage('parent', this)">Parent Login</button>
+    <button onclick="showPage('settings', this)">Settings</button>
+  </div>
+
+  <div id="dash" class="card" style="display:none">
+    <h2>Dashboard - <span class="schoolNameText">Your School</span></h2>
+    <p>Class Average: <b id="avgDash">-</b></p>
+    <p>Top Student: <b id="topDash">-</b></p>
+    <p>Fees Collected: <b id="feeDash">-</b></p>
+    <p>Attendance: <b>96%</b></p>
+  </div>
+
+  <div id="marks" class="card">
+    <h2>STEP 1 - TYPE SUBJECTS</h2>
+    <div id="subjectList"></div><br>
+    <input id="newSubject" placeholder="Type new subject e.g. Luganda"><br><br>
+    <button style="background:green;color:white" onclick="addSubject()">+ Add Subject</button><br><br>
+    <b>Class:</b><input id="classInput" value="S2">
+    <h2>STEP 2 - ENTER MARKS + FEES + ATTENDANCE</h2>
+    
+    <div style="overflow:auto; max-height:300px;">
+      <table><thead><tr id="headRow"></tr></thead><tbody id="tableBody"></tbody></table>
+    </div>
+    <button class="blue" onclick="addStudent()">+ Add Student</button>
+    <button class="green" onclick="makeAllReports()">Generate Report Cards - ALL STUDENTS</button>
+    <p>Average: <b id="avg">-</b></p><p>Top: <b id="top">-</b></p><p>Status: <b id="status">Saved Offline</b></p>
+  </div>
+
+  <div id="report" class="card" style="display:none">
+    <h2>Report Cards - ALL STUDENTS</h2>
+    <p>School: <b class="schoolNameText">Your School</b></p>
+    <p>Motto: <span id="mottoText">Excellence For All</span></p>
+    <p>Class: <b id="reportClass">S2</b> - Total: <b id="reportCount">-</b></p>
+    <p id="noReport">No report yet. Go to Marks and click Generate.</p>
+    <div id="allReports"></div>
+    <button class="blue" onclick="window.print()">Download / Print ALL</button>
+  </div>
+
+  <div id="more" class="card" style="display:none">
+    <h2>Fees - Behaviour - Medical</h2>
+    <p>Fees per term:</p><input value="450000">
+    <p>Behaviour:</p><select><option>Good Conduct</option><option>Needs Guidance</option><option>Excellent Discipline</option></select>
+    <p>Medical:</p><input placeholder="e.g. Visited clinic - Malaria, treated">
+    <p>Homework:</p><input placeholder="e.g. Maths Pg 42 Q1-10"><br><br>
+    <button class="blue" onclick="alert('All Saved Offline!')">Save All</button>
+  </div>
+
+  <div id="parent" class="card" style="display:none">
+    <h2>Parent / Teacher Login</h2>
+    <p>PIN only. No OTP.</p>
+    <select><option>Parent</option><option>Teacher</option><option>Headteacher</option></select>
+    <br><br><input placeholder="Admission No. / Teacher ID"><br><br><input placeholder="PIN" type="password"><br><br>
+    <button class="blue" onclick="alert('Welcome! Report shows only after PUBLISH.')">Login</button>
+    <p>Report: <b id="parentReport">Hidden - Waiting for Publish</b></p>
+  </div>
+
+  <div id="settings" class="card" style="display:none">
+    <h2>Settings</h2><p>Grading:</p>
+    <select><option>Uganda NLSC A-E</option><option>Uganda Primary PLE</option><option>Nursery Checklist</option><option>Uganda Secondary UCE</option><option>Uganda Secondary UACE</option><option>Universities</option><option>Kenya CBC</option><option>IGCSE</option></select>
+    <br><br><label><input type="checkbox" checked style="width:auto"> Offline ON</label><br>
+    <label><input type="checkbox" checked style="width:auto"> Auto-Promote</label><br>
+    <label><input type="checkbox" checked style="width:auto"> Allow Export / Delete</label><br><br>
+    <button class="blue" onclick="alert('Settings Saved!')">Save Settings</button>
+  </div>
+</div>
+
+<script>
+var subjects = ["Mathematics", "English", "Science", "SST", "CRE"];
+var students = [
+  { name: "Achieng Grace", marks: [92,85,78,88,90], fee: "Paid", att: 96, beh: "Good Conduct", phone: "256700000001", email: "grace@gmail.com" },
+  { name: "Mugisha Brian", marks: [78,70,65,72,68], fee: "Paid", att: 94, beh: "Good Conduct", phone: "256700000002", email: "brian@gmail.com" },
+  { name: "Nakato Faith", marks: [65,60,58,62,55], fee: "Half", att: 88, beh: "Needs Guidance", phone: "256700000003", email: "faith@gmail.com" },
+  { name: "Okello David", marks: [54,50,48,52,45], fee: "Unpaid", att: 90, beh: "Good Conduct", phone: "256700000004", email: "david@gmail.com" },
+  { name: "Atim Sarah", marks: [41,40,38,42,35], fee: "Paid", att: 92, beh: "Good Conduct", phone: "256700000005", email: "sarah@gmail.com" }
+];
+var sortedStudents = [];
+function changeName() { var name = document.getElementById("schoolName").value; if (name == "") { name = "Your School"; } var all = document.querySelectorAll(".schoolNameText"); for (var i = 0; i < all.length; i++) { all[i].innerText = name.toUpperCase(); } }
+function changeIframe() { var link = document.getElementById("iframeLink").value; document.getElementById("myFrame").src = link; alert("Iframe changed!"); }
+function getTotal(s) { var t = 0; for (var i = 0; i < s.marks.length; i++) { t = t + Number(s.marks[i]); } return t; }
+function getAverage(s) { if (subjects.length == 0) { return 0; } return Math.round(getTotal(s) / subjects.length); }
+function getGrade(a) { if (a >= 80) { return "A"; } if (a >= 70) { return "B"; } if (a >= 60) { return "C"; } if (a >= 50) { return "D"; } return "E"; }
+function getRemark(g) { if (g == "A") { return "Excellent"; } if (g == "B") { return "Very Good"; } if (g == "C") { return "Good"; } if (g == "D") { return "Fair"; } return "Try Harder"; }
+function showPage(id, btn) { var pages = ["dash","marks","report","more","parent","settings"]; for (var i = 0; i < pages.length; i++) { document.getElementById(pages[i]).style.display = "none"; } document.getElementById(id).style.display = "block"; var b = document.querySelectorAll(".tabs button"); for (var j = 0; j < b.length; j++) { b[j].classList.remove("active"); } if (btn) { btn.classList.add("active"); } }
+function showSubjects() { var area = document.getElementById("subjectList"); area.innerHTML = ""; for (var i = 0; i < subjects.length; i++) { area.innerHTML = area.innerHTML + '<div style="margin-bottom:5px"><input value="' + subjects[i] + '" onchange="changeSubject(' + i + ', this.value)" style="width:200px"> <button onclick="removeSubject(' + i + ')" style="background:red;color:white">x</button></div>'; } }
+function changeSubject(i, v) { subjects[i] = v; showAll(); }
+function removeSubject(i) { subjects.splice(i, 1); for (var k = 0; k < students.length; k++) { students[k].marks.splice(i, 1); } showAll(); }
+function addSubject() { var v = document.getElementById("newSubject").value; if (v == "") { alert("Type a subject first"); return; } subjects.push(v); for (var i = 0; i < students.length; i++) { students[i].marks.push(0); } document.getElementById("newSubject").value = ""; showAll(); }
+function addStudent() { var name = prompt("Student Name:"); if (!name) { return; } var phone = prompt("Parent Phone e.g. 256700000000:"); var email = prompt("Parent Email e.g. parent@gmail.com:"); var m = []; for (var i = 0; i < subjects.length; i++) { m.push(0); } students.push({ name: name, marks: m, fee: "Unpaid", att: 100, beh: "Good Conduct", phone: phone, email: email }); showAll(); }
+function showAll() { showSubjects(); showTable(); saveData(); }
+function showTable() {
+  var head = document.getElementById("headRow"); head.innerHTML = "<th>STUDENT NAME</th>";
+  for (var i = 0; i < subjects.length; i++) { head.innerHTML = head.innerHTML + "<th>" + subjects[i] + "</th>"; }
+  head.innerHTML = head.innerHTML + "<th>TOTAL</th><th>AVG</th><th>GRADE</th><th>POS</th><th>REMARK</th><th>FEE</th><th>ATT</th><th>PHONE</th><th>EMAIL</th>";
+  var sorted = students.slice(); sorted.sort(function(a,b){ return getTotal(b) - getTotal(a); });
+  var pos = {}; for (var p = 0; p < sorted.length; p++) { pos[sorted[p].name] = p + 1; }
+  var body = document.getElementById("tableBody"); body.innerHTML = "";
+  for (var s = 0; s < students.length; s++) {
+    var st = students[s]; var total = getTotal(st); var avg = getAverage(st); var grade = getGrade(avg); var remark = getRemark(grade);
+    var row = "<tr><td><input value='" + st.name + "' onchange='changeStudentName(" + s + ", this.value)'></td>";
+    for (var m = 0; m < st.marks.length; m++) { row = row + "<td><input type='number' value='" + st.marks[m] + "' onchange='changeMark(" + s + "," + m + ", this.value)' style='width:60px'></td>"; }
+    row = row + "<td><b>" + total + "</b></td><td>" + avg + "</td><td><b>" + grade + "</b></td><td>" + pos[st.name] + "</td><td>" + remark + "</td>";
+    row = row + "<td><select onchange='changeFee(" + s + ", this.value)'><option>Paid</option><option>Half</option><option>Unpaid</option></select></td>";
+    row = row + "<td><input type='number' value='" + st.att + "' onchange='changeAtt(" + s + ", this.value)' style='width:60px'></td>";
+    row = row + "<td><input value='" + (st.phone || "") + "' onchange='changePhone(" + s + ", this.value)' style='width:110px'></td>";
+    row = row + "<td><input value='" + (st.email || "") + "' onchange='changeEmail(" + s + ", this.value)' style='width:130px'></td></tr>";
+    body.innerHTML = body.innerHTML + row;
+  }
+  var ct = 0; for (var k = 0; k < students.length; k++) { ct = ct + getAverage(students[k]); }
+  var ca = 0; if (students.length > 0) { ca = Math.round(ct / students.length); }
+  document.getElementById("avg").innerText = ca + "%"; document.getElementById("avgDash").innerText = ca + "%";
+  if (sorted.length > 0) { document.getElementById("top").innerText = sorted[0].name + " - " + getTotal(sorted[0]); document.getElementById("topDash").innerText = sorted[0].name + " - " + getTotal(sorted[0]); }
+  var paid = 0; for (var f = 0; f < students.length; f++) { if (students[f].fee == "Paid") { paid = paid + 1; } }
+  document.getElementById("feeDash").innerText = paid + " Paid / " + students.length;
+}
+function changeStudentName(i, v) { students[i].name = v; showAll(); }
+function changeMark(s, m, v) { students[s].marks[m] = Number(v); showAll(); }
+function changeFee(s, v) { students[s].fee = v; showAll(); }
+function changeAtt(s, v) { students[s].att = Number(v); showAll(); }
+function changePhone(s, v) { students[s].phone = v; showAll(); }
+function changeEmail(s, v) { students[s].email = v; showAll(); }
+function makeAllReports() {
+  showPage('report', null);
+  var sorted = students.slice(); sorted.sort(function(a,b){ return getTotal(b) - getTotal(a); }); sortedStudents = sorted;
+  var school = document.getElementById("schoolName").value; if (school == "") { school = "Your School"; }
+  var motto = document.getElementById("mottoInput").value; if (motto == "") { motto = "Excellence For All"; }
+  var className = document.getElementById("classInput").value;
+  document.getElementById("reportClass").innerText = className; document.getElementById("reportCount").innerText = students.length; document.getElementById("mottoText").innerText = motto; document.getElementById("noReport").style.display = "none";
+  var area = document.getElementById("allReports"); area.innerHTML = "";
+  for (var i = 0; i < sorted.length; i++) {
+    var st = sorted[i]; var total = getTotal(st); var avg = getAverage(st); var grade = getGrade(avg); var remark = getRemark(grade);
+    var marksText = ""; for (var m = 0; m < subjects.length; m++) { marksText = marksText + subjects[m] + ": " + st.marks[m] + " (" + getGrade(st.marks[m]) + ")<br>"; }
+    area.innerHTML = area.innerHTML + '<div class="report"><h3>' + school.toUpperCase() + '</h3><p>Motto: ' + motto + '</p><p><b>Name:</b> ' + st.name + ' - <b>Class:</b> ' + className + '</p><p><b>Att:</b> ' + st.att + '% - <b>Fee:</b> ' + st.fee + '</p><hr><p>' + marksText + '</p><p><b>Total:</b> ' + total + ' - <b>Average:</b> ' + avg + '% - <b>Grade:</b> ' + grade + ' - <b>Position:</b> ' + (i+1) + '/' + students.length + '</p><p><b>Remark:</b> ' + remark + '</p><p>Phone: ' + (st.phone || "") + ' | Email: ' + (st.email || "") + '</p><button style="background:green;color:white" onclick="sendWhatsApp(' + i + ')">Send via WhatsApp</button><br><br><button style="background:blue;color:white" onclick="sendEmail(' + i + ')">Send via Email</button></div>';
+  }
+}
+function publish() { document.getElementById("parentReport").innerText = "PUBLISHED - See Report Card"; alert("PUBLISHED! Parents can now see results."); }
+function sendWhatsApp(i) { var st = sortedStudents[i]; var school = document.getElementById("schoolName").value; if (school == "") { school = "ZIRACHI ACADEMIA"; } var msg = "Hello, Report for " + st.name + " from " + school + ". Total: " + getTotal(st) + ", Average: " + getAverage(st) + "%, Grade: " + getGrade(getAverage(st)) + ". Thank you."; var phone = st.phone; if (!phone) { phone = prompt("Type parent WhatsApp number e.g. 256700000000"); } window.open("https://wa.me/" + phone + "?text=" + encodeURIComponent(msg), "_blank"); }
+function sendEmail(i) { var st = sortedStudents[i]; var school = document.getElementById("schoolName").value; if (school == "") { school = "ZIRACHI ACADEMIA"; } var subject = "Report Card - " + st.name + " - " + school; var body = "Hello,\n\nReport for " + st.name + ".\nTotal: " + getTotal(st) + "\nAverage: " + getAverage(st) + "%\nGrade: " + getGrade(getAverage(st)) + "\n\nThank you,\n" + school; var email = st.email; if (!email) { email = prompt("Type parent email"); } window.location.href = "mailto:" + email + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body); }
+function saveData() { document.getElementById("status").innerText = "Saving..."; var data = { subjects: subjects, students: students, school: document.getElementById("schoolName").value }; localStorage.setItem("zirachiFinal", JSON.stringify(data)); setTimeout(function(){ document.getElementById("status").innerText = "Saved Offline"; }, 500); }
+var saved = localStorage.getItem("zirachiFinal");
+if (saved) { try { var d = JSON.parse(saved); if (d.subjects) { subjects = d.subjects; } if (d.students) { students = d.students; } if (d.school) { document.getElementById("schoolName").value = d.school; } } catch(e) {} }
+changeName(); showAll();
+</script>
+</body>
+</html>
